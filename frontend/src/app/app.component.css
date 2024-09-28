@@ -1,20 +1,37 @@
 /* src/app/app.component.css */
+/* Styles globaux */
+body {
+  font-family: 'Montserrat', sans-serif; /* Police moderne */
+  line-height: 1.6; /* Espacement entre les lignes */
+  background-color: #f4f4f4; /* Couleur de fond légère */
+  margin: 0; /* Retirer la marge par défaut */
+}
+
 /* Header et Navigation */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #282c34;
-  color: white;
-  padding: 10px 20px;
+  background: linear-gradient(135deg, #3b3b3b 30%, #1e1e1e 100%); /* Dégradé dynamique */
+  color: #ffffff;
+  padding: 15px 30px;
   position: sticky;
   top: 0;
   z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  transition: background-color 0.3s, padding 0.3s;
+}
+
+header:hover {
+  background: linear-gradient(135deg, #444 30%, #222 100%); /* Changement de couleur au survol */
+  padding: 20px 30px; /* Augmentation du padding au survol */
 }
 
 .logo h1 {
   margin: 0;
-  font-size: 1.5em;
+  font-size: 2em;
+  letter-spacing: 1px;
+  text-transform: uppercase; /* Transforme le texte en majuscules */
 }
 
 nav ul {
@@ -25,27 +42,95 @@ nav ul {
 }
 
 nav ul li {
-  margin-right: 20px;
+  margin-right: 40px;
 }
 
 nav ul li a {
-  color: white;
+  color: #ffffff;
   text-decoration: none;
   font-weight: bold;
-  padding: 8px 12px;
-  border-radius: 4px;
-  transition: background-color 0.3s;
+  padding: 10px 15px;
+  border-radius: 25px;
+  background-color: transparent;
+  border: 2px solid transparent;
+  transition: background-color 0.3s, transform 0.3s, border 0.3s;
 }
 
-nav ul li a:hover, nav ul li a.active {
+nav ul li a:hover,
+nav ul li a.active {
   background-color: #555;
+  border: 2px solid #ffffff;
+  transform: translateY(-2px);
+}
+
+/* Section Hero */
+.hero {
+  background: url('/path/to/your/image.jpg') no-repeat center center/cover; /* Image de fond */
+  color: white;
+  text-align: center;
+  padding: 80px 20px; /* Espacement augmenté */
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+  position: relative; /* Pour le positionnement des éléments */
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Superposition sombre pour le contraste */
+  z-index: 1; /* Assure que le fond est derrière le texte */
+}
+
+.hero h2 {
+  font-size: 3em; /* Taille de police plus grande */
+  margin-bottom: 10px;
+  z-index: 2; /* Texte au-dessus de la superposition */
+}
+
+.hero p {
+  font-size: 1.5em; /* Taille de police pour le texte */
+  z-index: 2; /* Texte au-dessus de la superposition */
 }
 
 /* Pied de page */
 footer {
   text-align: center;
-  padding: 20px;
-  background-color: #282c34;
-  color: white;
+  padding: 30px;
+  background: linear-gradient(135deg, #3b3b3b 30%, #1e1e1e 100%);
+  color: #ffffff;
   margin-top: 40px;
+  position: relative;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.social-links {
+  margin-top: 10px;
+}
+
+.social-links a {
+  color: #ffffff;
+  margin: 0 15px;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.social-links a:hover {
+  color: #ff4081; /* Couleur au survol */
+}
+
+/* Améliorations supplémentaires */
+a:focus {
+  outline: none; /* Retire le contour par défaut */
+}
+
+a:focus-visible {
+  outline: 2px solid #ff4081; /* Contour visible pour l'accessibilité */
 }
