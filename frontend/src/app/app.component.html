@@ -1,0 +1,22 @@
+<!-- src/app/app.component.html -->
+<header>
+  <div class="logo">
+    <h1>CD Market</h1>
+  </div>
+  <nav>
+    <ul>
+      <li><a routerLink="/films" routerLinkActive="active">Films</a></li>
+      <li><a routerLink="/panier" routerLinkActive="active">Panier</a></li>
+      <li><a routerLink="/achat" routerLinkActive="active">Mes Achats</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <!-- Là où le contenu de chaque route sera affiché -->
+  <router-outlet></router-outlet>
+</main>
+
+<footer>
+  <p>&copy; 2024 CD Market - Tous droits réservés</p>
+</footer>

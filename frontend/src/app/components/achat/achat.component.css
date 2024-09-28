@@ -1,0 +1,48 @@
+/* src/app/components/achat/achat.component.css */
+.achat-container {
+  padding: 20px;
+}
+
+.achat-item {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.achat-item h3 {
+  margin-top: 0;
+}
+
+.films-achat {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.film-item {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #fff;
+  width: 200px;
+}
+
+.film-item img {
+  width: 60px;
+  height: auto;
+  border-radius: 8px;
+  margin-right: 10px;
+}
+
+.film-details h4 {
+  margin: 0 0 5px 0;
+}
+
+.film-details p {
+  margin: 2px 0;
+}

@@ -1,0 +1,23 @@
+<!-- src/app/components/panier/panier.component.html -->
+<div class="panier-container">
+  <h2>Votre Panier</h2>
+
+  <div *ngIf="panier && panier.films.length > 0; else panierVide">
+    <div class="film-item" *ngFor="let film of panier.films">
+      <img [src]="film.urlImage" alt="{{ film.titre }}" />
+      <div class="film-details">
+        <h3>{{ film.titre }}</h3>
+        <p>{{ film.description }}</p>
+        <p><strong>{{ film.prix }}€</strong></p>
+        <button (click)="supprimerDuPanier(film)">Supprimer</button>
+      </div>
+    </div>
+    <div class="achat-section">
+      <button (click)="acheter()">Acheter</button>
+    </div>
+  </div>
+
+  <ng-template #panierVide>
+    <p>Votre panier est vide.</p>
+  </ng-template>
+</div>

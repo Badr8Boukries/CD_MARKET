@@ -1,0 +1,25 @@
+<!-- src/app/components/achat/achat.component.html -->
+<div class="achat-container">
+  <h2>Mes Achats</h2>
+
+  <div *ngIf="achats.length > 0; else aucunAchat">
+    <div class="achat-item" *ngFor="let achat of achats">
+      <h3>Achat ID: {{ achat.id }}</h3>
+      <p>Date d'achat: {{ achat.dateAchat | date:'short' }}</p>
+      <div class="films-achat">
+        <div class="film-item" *ngFor="let film of achat.films">
+          <img [src]="film.urlImage" alt="{{ film.titre }}" />
+          <div class="film-details">
+            <h4>{{ film.titre }}</h4>
+            <p>{{ film.description }}</p>
+            <p><strong>{{ film.prix }}€</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #aucunAchat>
+    <p>Aucun achat enregistré.</p>
+  </ng-template>
+</div>

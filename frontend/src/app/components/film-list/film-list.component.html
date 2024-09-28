@@ -1,0 +1,21 @@
+<!-- src/app/components/film-list/film-list.component.html -->
+<div class="search-bar">
+  <input
+    type="text"
+    [(ngModel)]="searchTerm"
+    placeholder="Rechercher un film..."
+    (keyup.enter)="onSearch()"
+  />
+  <button (click)="onSearch()">Rechercher</button>
+  <button (click)="clearSearch()">Effacer</button>
+</div>
+
+<div class="film-list">
+  <div *ngFor="let film of films" class="film-item">
+    <img [src]="film.urlImage" alt="{{ film.titre }}" />
+    <h2>{{ film.titre }}</h2>
+    <p>{{ film.description }}</p>
+    <p><strong>{{ film.prix }}€</strong></p>
+    <button (click)="ajouterAuPanier(film)">Ajouter au panier</button>
+  </div>
+</div>
