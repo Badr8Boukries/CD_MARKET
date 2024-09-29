@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';  // Import du HttpClientModule
+import { HttpClientModule,provideHttpClient,withFetch  } from '@angular/common/http';  // Import du HttpClientModule
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,7 +25,9 @@ import {FormsModule} from "@angular/forms";
     FormsModule,
     // Ajout du module ici
   ],
-  providers: [],
+  providers: [
+    provideHttpClient(withFetch()) // Ajoute cette ligne pour activer `fetch`
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

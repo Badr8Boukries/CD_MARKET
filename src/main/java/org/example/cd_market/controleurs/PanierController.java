@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/paniers")
+@RequestMapping("/paniers")
 public class PanierController {
     @Autowired
     private PanierService panierService;

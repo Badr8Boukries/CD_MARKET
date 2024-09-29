@@ -19,17 +19,17 @@ export class FilmListComponent implements OnInit {
     this.getFilms();
   }
 
+
   getFilms(): void {
-    if (this.searchTerm.trim() === '') {
-      this.filmService.getFilms().subscribe(data => {
-        this.films = data;
-      });
-    } else {
-      this.filmService.searchFilms(this.searchTerm).subscribe(data => {
-        this.films = data;
-      });
-    }
+    console.log('Tentative de récupération des films');
+    this.filmService.getFilms().subscribe(data => {
+      console.log('Films récupérés :', data); // Vérifiez ce qui est récupéré
+      this.films = data;
+    }, error => {
+      console.error('Erreur lors de la récupération des films', error);
+    });
   }
+
 
   onSearch(): void {
     this.getFilms();

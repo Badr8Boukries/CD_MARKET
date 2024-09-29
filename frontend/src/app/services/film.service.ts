@@ -11,7 +11,7 @@ import { Achat } from '../models/achat.model';
 })
 export class FilmService {
 
-  private baseUrl = 'http://localhost:8080/api';  // URL de ton back-end
+  private baseUrl = 'http://localhost:8080';  // URL de ton back-end
 
   constructor(private http: HttpClient) { }
 

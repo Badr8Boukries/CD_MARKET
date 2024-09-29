@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/achats")
+@RequestMapping("/achats")
 public class AchatController {
     @Autowired
     private AchatService achatService;
