@@ -21,13 +21,15 @@ export class FilmListComponent implements OnInit {
 
 
   getFilms(): void {
-    console.log('Tentative de récupération des films');
-    this.filmService.getFilms().subscribe(data => {
-      console.log('Films récupérés :', data); // Vérifiez ce qui est récupéré
-      this.films = data;
-    }, error => {
-      console.error('Erreur lors de la récupération des films', error);
-    });
+    this.filmService.getFilms().subscribe(
+      data => {
+        console.log('Films récupérés :', data); // Vérification des données
+        this.films = data;
+      },
+      error => {
+        console.error('Erreur lors de la récupération des films', error);
+      }
+    );
   }
 
 

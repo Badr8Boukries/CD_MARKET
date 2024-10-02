@@ -4,16 +4,18 @@
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
   padding: 20px;
+  background-color: rgba(255, 0, 0, 0.1); /* couleur de fond temporaire */
 }
 
 .film-item {
-  background-color: #f9f9f9;
+  background-color: #f9f9f9; /* couleur de fond temporaire */
   border: 1px solid #ddd;
   padding: 15px;
   text-align: center;
   border-radius: 8px;
   transition: transform 0.2s;
 }
+
 
 .film-item:hover {
   transform: scale(1.05);

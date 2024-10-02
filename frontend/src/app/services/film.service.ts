@@ -1,7 +1,7 @@
 // src/app/services/film.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Observable, tap} from 'rxjs';
 import { Film } from '../models/film.model';
 import { Panier } from '../models/panier.model';
 import { Achat } from '../models/achat.model';
@@ -16,9 +16,14 @@ export class FilmService {
   constructor(private http: HttpClient) { }
 
   // Récupérer tous les films
+// src/app/services/film.service.ts
   getFilms(): Observable<Film[]> {
-    return this.http.get<Film[]>(`${this.baseUrl}/films`);
+    console.log('Appel à l\'API pour récupérer les films...');
+    return this.http.get<Film[]>(`${this.baseUrl}/films`).pipe(
+      tap((data) => console.log('Données reçues :', data)) // Affiche les données dans la console
+    );
   }
+
 
   // Rechercher des films par titre
   searchFilms(titre: string): Observable<Film[]> {
