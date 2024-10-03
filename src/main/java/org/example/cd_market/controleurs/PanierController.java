@@ -3,44 +3,63 @@ package org.example.cd_market.controleurs;
 
 import org.example.cd_market.models.Film;
 import org.example.cd_market.models.Panier;
+import org.example.cd_market.services.FilmService;
 import org.example.cd_market.services.PanierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
+
 @RestController
-@RequestMapping("/paniers")
+@RequestMapping("/panier")
+@CrossOrigin(origins = "http://localhost:4200")
 public class PanierController {
+
     @Autowired
     private PanierService panierService;
 
-    @PostMapping
-    public Panier createPanier() {
-        return panierService.createPanier();
+    @Autowired
+    private FilmService filmService;
+
+    // Ajouter un film au panier unique via son ID
+    @PostMapping("/add/{filmId}")
+    public ResponseEntity<Panier> addFilmToPanier(@PathVariable Long filmId) {
+        Optional<Film> filmOptional = filmService.getFilmById(filmId);
+        if (!filmOptional.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Film film = filmOptional.get();
+        return panierService.addFilmToPanier(film); // Appel à la méthode mise à jour
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Panier> getPanier(@PathVariable Long id) {
-        return panierService.getPanierById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    // Supprimer un film du panier unique via son ID
+    @PostMapping("/remove/{filmId}")
+    public ResponseEntity<Panier> removeFilmFromPanier(@PathVariable Long filmId) {
+        Optional<Film> filmOptional = filmService.getFilmById(filmId);
+        if (!filmOptional.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Film film = filmOptional.get();  // Obtenez le film
+        Panier updatedPanier = panierService.removeFilmFromPanier(film);
+        return ResponseEntity.ok(updatedPanier);
     }
 
-    @PostMapping("/{id}/add")
-    public ResponseEntity<Panier> addFilmToPanier(@PathVariable Long id, @RequestBody Film film) {
-        Panier updatedPanier = panierService.addFilmToPanier(id, film);
-        return updatedPanier != null ? ResponseEntity.ok(updatedPanier) : ResponseEntity.notFound().build();
-    }
-
-    @PostMapping("/{id}/remove")
-    public ResponseEntity<Panier> removeFilmFromPanier(@PathVariable Long id, @RequestBody Film film) {
-        Panier updatedPanier = panierService.removeFilmFromPanier(id, film);
-        return updatedPanier != null ? ResponseEntity.ok(updatedPanier) : ResponseEntity.notFound().build();
-    }
-
-    @PostMapping("/{id}/clear")
-    public ResponseEntity<Void> clearPanier(@PathVariable Long id) {
-        panierService.clearPanier(id);
+    // Vider le panier unique
+    @PostMapping("/clear")
+    public ResponseEntity<Void> clearPanier() {
+        panierService.clearPanier();
         return ResponseEntity.ok().build();
+    }
+
+    // Récupérer le panier unique
+
+    @GetMapping("/films")
+    public ResponseEntity<List<Film>> getAllFilmsDansLePanier() {
+        List<Film> films = panierService.getAllFilmsDansLePanier();
+        return ResponseEntity.ok(films);
     }
 }
