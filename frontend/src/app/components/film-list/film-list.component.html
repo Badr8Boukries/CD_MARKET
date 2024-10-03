@@ -12,10 +12,13 @@
 
 <div class="film-list">
   <div *ngFor="let film of films" class="film-item">
-    <img [src]="film.urlImage || 'C:\\Users\\badr4\\eclipse-workspace2024\\CD_MARKET\\images\\image.jpg'" alt="{{ film.titre }}" />
+    <img
+      [src]="film.urlImage || 'C:\\Users\\badr4\\eclipse-workspace2024\\CD_MARKET\\images\\image.jpg'"
+      alt="{{ film.titre }}"
+    />
     <h2>{{ film.titre }}</h2>
     <p>{{ film.description }}</p>
-    <p><strong>{{ film.prix }}€</strong></p>
+    <p class="film-price"><strong>{{ film.prix }}€</strong></p>
     <button (click)="ajouterAuPanier(film)">Ajouter au panier</button>
   </div>
 </div>

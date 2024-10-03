@@ -30,10 +30,11 @@ public class FilmController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<Film> searchFilmByTitle(@RequestParam String title) {
-        Film film = filmService.searchFilmByTitle(title);
-        return film != null ? ResponseEntity.ok(film) : ResponseEntity.notFound().build();
+    public ResponseEntity<List<Film>> searchFilmByTitle(@RequestParam String title) {
+        List<Film> films = (List<Film>) filmService.searchFilmByTitle(title);
+        return films != null && !films.isEmpty() ? ResponseEntity.ok(films) : ResponseEntity.notFound().build();
     }
+
 
     @GetMapping("/byPrice")
     public List<Film> getFilmsByMaxPrice(@RequestParam Double maxPrice) {

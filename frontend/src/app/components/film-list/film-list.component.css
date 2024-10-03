@@ -1,51 +1,11 @@
 /* src/app/components/film-list/film-list.component.css */
-.film-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
-  padding: 20px;
-  background-color: rgba(255, 0, 0, 0.1); /* couleur de fond temporaire */
+body {
+  font-family: 'Arial', sans-serif; /* Police générale */
+  background-color: #f5f5f5; /* Couleur de fond de la page */
+  margin: 0;
+  padding: 0;
 }
 
-.film-item {
-  background-color: #f9f9f9; /* couleur de fond temporaire */
-  border: 1px solid #ddd;
-  padding: 15px;
-  text-align: center;
-  border-radius: 8px;
-  transition: transform 0.2s;
-}
-
-
-.film-item:hover {
-  transform: scale(1.05);
-}
-
-.film-item img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
-
-.film-item h2 {
-  font-size: 18px;
-  margin: 10px 0;
-}
-
-.film-item button {
-  background-color: #28a745;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.film-item button:hover {
-  background-color: #218838;
-}
-
-/* Style de la barre de recherche */
 .search-bar {
   display: flex;
   justify-content: center;
@@ -54,36 +14,104 @@
 }
 
 .search-bar input {
-  padding: 10px;
+  padding: 12px;
   width: 300px;
   font-size: 16px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 25px; /* Coins arrondis pour le champ de recherche */
+  transition: border 0.3s;
+}
+
+.search-bar input:focus {
+  border-color: #007bff; /* Changement de couleur au focus */
+  outline: none; /* Suppression de l'outline par défaut */
 }
 
 .search-bar button {
-  padding: 10px 15px;
+  padding: 12px 20px;
   margin-left: 10px;
   font-size: 16px;
   border: none;
-  border-radius: 4px;
+  border-radius: 25px; /* Coins arrondis pour les boutons */
   cursor: pointer;
+  transition: background-color 0.3s; /* Animation pour les boutons */
 }
 
 .search-bar button:first-child {
-  background-color: #007bff;
+  background-color: #007bff; /* Couleur bleue pour le bouton de recherche */
   color: white;
 }
 
 .search-bar button:first-child:hover {
-  background-color: #0056b3;
+  background-color: #0056b3; /* Couleur plus foncée au survol */
 }
 
 .search-bar button:last-child {
-  background-color: #6c757d;
+  background-color: #dc3545; /* Couleur rouge pour le bouton d'effacement */
   color: white;
 }
 
 .search-bar button:last-child:hover {
-  background-color: #5a6268;
+  background-color: #c82333; /* Couleur plus foncée au survol */
+}
+
+.film-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Ajustement de la taille minimum */
+  gap: 30px;
+  padding: 20px;
+}
+
+.film-item {
+  background-color: #ffffff; /* Fond blanc */
+  border: 1px solid #ddd;
+  padding: 15px;
+  text-align: center;
+  border-radius: 15px; /* Coins arrondis */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Ombre douce */
+  transition: transform 0.2s, box-shadow 0.2s; /* Animation pour l'effet de survol */
+  position: relative; /* Position pour l'effet de survol */
+}
+
+.film-item:hover {
+  transform: translateY(-5px); /* Légère élévation au survol */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Ombre plus intense au survol */
+}
+
+.film-item img {
+  width: 100%;
+  height: 200px; /* Hauteur fixe pour uniformiser les images */
+  object-fit: cover; /* Pour garder le ratio d'aspect */
+  border-radius: 10px; /* Coins arrondis pour les images */
+}
+
+.film-item h2 {
+  font-size: 20px; /* Titre légèrement plus grand */
+  margin: 10px 0;
+  color: #333; /* Couleur du titre */
+}
+
+.film-item p {
+  color: #666; /* Couleur du texte pour la description */
+  font-size: 14px;
+}
+
+.film-price {
+  font-size: 18px; /* Taille de police pour le prix */
+  color: #28a745; /* Couleur verte pour le prix */
+  margin: 10px 0; /* Espace autour du prix */
+}
+
+.film-item button {
+  background-color: #28a745; /* Couleur verte pour le bouton d'ajout au panier */
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 25px; /* Coins arrondis pour le bouton */
+  cursor: pointer;
+  transition: background-color 0.2s; /* Animation pour le bouton */
+}
+
+.film-item button:hover {
+  background-color: #218838; /* Couleur plus foncée au survol */
 }

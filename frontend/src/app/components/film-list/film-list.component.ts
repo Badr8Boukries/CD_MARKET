@@ -19,11 +19,10 @@ export class FilmListComponent implements OnInit {
     this.getFilms();
   }
 
-
   getFilms(): void {
     this.filmService.getFilms().subscribe(
       data => {
-        console.log('Films récupérés :', data); // Vérification des données
+        console.log('Films récupérés :', data);
         this.films = data;
       },
       error => {
@@ -32,22 +31,25 @@ export class FilmListComponent implements OnInit {
     );
   }
 
-
-  onSearch(): void {
-    this.getFilms();
-  }
-
   ajouterAuPanier(film: Film): void {
-    this.filmService.addToPanier(this.panierId, film.id).subscribe(() => {
-      alert(`${film.titre} a été ajouté au panier.`);
-    }, error => {
-      console.error('Erreur lors de l\'ajout au panier', error);
-      alert('Erreur lors de l\'ajout au panier.');
-    });
+    this.filmService.addToPanier(film.id).subscribe(
+      () => {
+        alert(`${film.titre} a été ajouté au panier.`);
+        console.log('le film est ajouter avec suceeeeeeeeeeeeeee');
+
+      },
+      (error) => {
+        console.error('Erreur lors de l\'ajout au panier', error);
+        alert('Erreur lors de l\'ajout au panier : ce film existe deja sur le panier  ' );
+      }
+    );
   }
 
   clearSearch(): void {
     this.searchTerm = '';
+    this.getFilms();
+  }
+  onSearch(): void {
     this.getFilms();
   }
 }
