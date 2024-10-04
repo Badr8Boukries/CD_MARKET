@@ -1,8 +1,9 @@
 // src/app/components/panier/panier.component.ts
+
 import { Component, OnInit } from '@angular/core';
-import { FilmService } from '../../services/film.service';
 import { Panier } from '../../models/panier.model';
 import { Film } from '../../models/film.model';
+import { PanierService } from "../../services/panier/panier.service";
 
 @Component({
   selector: 'app-panier',
@@ -11,16 +12,15 @@ import { Film } from '../../models/film.model';
 })
 export class PanierComponent implements OnInit {
   panier: Panier | null = null;
-  panierId: number = 1; // Supposons un panier avec ID 1 pour simplifier
 
-  constructor(private filmService: FilmService) { }
+  constructor(private panierService: PanierService) { }
 
   ngOnInit(): void {
     this.getPanier();
   }
 
   getPanier(): void {
-    this.filmService.getPanier(this.panierId).subscribe(data => {
+    this.panierService.getPanier().subscribe(data => {
       this.panier = data;
     }, error => {
       console.error('Erreur lors de la récupération du panier', error);
@@ -29,7 +29,7 @@ export class PanierComponent implements OnInit {
   }
 
   supprimerDuPanier(film: Film): void {
-    this.filmService.removeFromPanier(this.panierId, film.id).subscribe(() => {
+    this.panierService.removeFromPanier(film.id).subscribe(() => {
       alert(`${film.titre} a été supprimé du panier.`);
       this.getPanier(); // Rafraîchir le panier
     }, error => {
@@ -38,16 +38,16 @@ export class PanierComponent implements OnInit {
     });
   }
 
-  acheter(): void {
+  acheter(film: Film): void {
     if (!this.panier || this.panier.films.length === 0) {
       alert('Votre panier est vide.');
       return;
     }
 
-    if (confirm('Êtes-vous sûr de vouloir acheter les films dans votre panier ?')) {
-      this.filmService.acheterFilms(this.panierId).subscribe(() => {
-        alert('Achat réussi !');
-        this.getPanier(); // Vider le panier après achat
+    if (confirm(`Êtes-vous sûr de vouloir acheter ${film.titre} ?`)) {
+      this.panierService.acheterFilms(film.id).subscribe(() => {
+        alert(`Achat réussi pour ${film.titre} !`);
+        this.supprimerDuPanier(film); // Appeler supprimerDuPanier ici
       }, error => {
         console.error('Erreur lors de l\'achat', error);
         alert('Erreur lors de l\'achat.');

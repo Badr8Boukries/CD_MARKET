@@ -10,10 +10,8 @@
         <p>{{ film.description }}</p>
         <p><strong>{{ film.prix }}€</strong></p>
         <button (click)="supprimerDuPanier(film)">Supprimer</button>
+        <button (click)="acheter(film)">Acheter</button> <!-- Passer le film ici -->
       </div>
-    </div>
-    <div class="achat-section">
-      <button (click)="acheter()">Acheter</button>
     </div>
   </div>
 

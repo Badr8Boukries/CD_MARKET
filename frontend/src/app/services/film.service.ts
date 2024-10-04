@@ -26,10 +26,7 @@ export class FilmService {
     return this.http.post(`${this.baseUrl}/panier/add/${filmId}`, {});
   }
 
-  // Récupérer le contenu du panier
-  getPanier(panierId: number): Observable<Panier> {
-    return this.http.get<Panier>(`${this.baseUrl}/paniers/${panierId}`);
-  }
+
 
   // Supprimer un film du panier
   removeFromPanier(panierId: number, filmId: number): Observable<any> {

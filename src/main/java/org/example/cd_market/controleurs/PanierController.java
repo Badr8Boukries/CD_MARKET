@@ -35,18 +35,15 @@ public class PanierController {
         return panierService.addFilmToPanier(film); // Appel à la méthode mise à jour
     }
 
-    // Supprimer un film du panier unique via son ID
-    @PostMapping("/remove/{filmId}")
-    public ResponseEntity<Panier> removeFilmFromPanier(@PathVariable Long filmId) {
-        Optional<Film> filmOptional = filmService.getFilmById(filmId);
-        if (!filmOptional.isPresent()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        Film film = filmOptional.get();  // Obtenez le film
-        Panier updatedPanier = panierService.removeFilmFromPanier(film);
-        return ResponseEntity.ok(updatedPanier);
+    @DeleteMapping("/delete/{filmId}")
+    public ResponseEntity<Void> removeFilmFromPanier(
+            @PathVariable Long filmId) {
+        panierService.supprimerFilmDuPanier(filmId);
+        return ResponseEntity.noContent().build(); // Retourner un statut 204 No Content
     }
+
+
+
 
     // Vider le panier unique
     @PostMapping("/clear")
@@ -62,4 +59,21 @@ public class PanierController {
         List<Film> films = panierService.getAllFilmsDansLePanier();
         return ResponseEntity.ok(films);
     }
+    @PostMapping("/acheter/{filmId}")
+    public ResponseEntity<Panier> acheterFilm(@PathVariable Long panierId, @PathVariable Long filmId) {
+        return panierService.acheterFilm(filmId);
+    }
+
+    @GetMapping("/paniers")
+    public ResponseEntity<Panier> getPanier() {
+        Panier panier = panierService.getPanierUnique();
+        if (panier != null) {
+            return ResponseEntity.ok(panier);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
+
 }

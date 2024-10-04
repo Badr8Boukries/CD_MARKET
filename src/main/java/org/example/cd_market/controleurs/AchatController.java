@@ -1,8 +1,6 @@
 package org.example.cd_market.controleurs;
 
-
 import org.example.cd_market.models.Achat;
-import org.example.cd_market.models.Film;
 import org.example.cd_market.services.AchatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -14,13 +12,19 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/achats")
+@CrossOrigin(origins = "http://localhost:4200")
 public class AchatController {
     @Autowired
     private AchatService achatService;
 
-    @PostMapping("/buy")
-    public ResponseEntity<Achat> buyFilm(@RequestBody Film film) {
-        Achat achat = achatService.buyFilm(film);
+    @PostMapping("/achter/{filmId}")
+    public ResponseEntity<Achat> buyFilm(@PathVariable Long filmId) {
+        Achat achat = achatService.acheter(filmId);
+
+        if (achat == null) {
+            return ResponseEntity.notFound().build(); // Film non trouvé dans le panier
+        }
+
         return ResponseEntity.ok(achat);
     }
 
