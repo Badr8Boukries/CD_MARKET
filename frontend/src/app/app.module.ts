@@ -23,6 +23,7 @@ import {FormsModule} from "@angular/forms";
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+
     // Ajout du module ici
   ],
   providers: [

@@ -22,10 +22,10 @@ public class FilmService {
         return filmRepository.findById(id);
     }
 
-    public Film searchFilmByTitle(String title) {
+    public List<Film> searchFilmByTitle(String title) {
+        // Utilise findByTitreContainingIgnoreCase pour récupérer une liste de films
         return filmRepository.findByTitreContainingIgnoreCase(title);
     }
-
     public List<Film> getFilmsByMaxPrice(Double maxPrice) {
         return filmRepository.findByPrixLessThanEqual(maxPrice);
     }

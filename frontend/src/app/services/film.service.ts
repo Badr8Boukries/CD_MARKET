@@ -45,4 +45,10 @@ export class FilmService {
   getAchats(): Observable<Achat[]> {
     return this.http.get<Achat[]>(`${this.baseUrl}/achats`);
   }
+  searchFilmByTitle(title: string): Observable<Film[]> {
+    return this.http.get<Film[]>(`${this.baseUrl}/films/search?title=${title}`);
+  }
+
+
+
 }

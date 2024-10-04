@@ -31,8 +31,8 @@ public class FilmController {
 
     @GetMapping("/search")
     public ResponseEntity<List<Film>> searchFilmByTitle(@RequestParam String title) {
-        List<Film> films = (List<Film>) filmService.searchFilmByTitle(title);
-        return films != null && !films.isEmpty() ? ResponseEntity.ok(films) : ResponseEntity.notFound().build();
+        List<Film> films = filmService.searchFilmByTitle(title);
+        return !films.isEmpty() ? ResponseEntity.ok(films) : ResponseEntity.notFound().build();
     }
 
 

@@ -1,4 +1,3 @@
-// src/app/components/film-list/film-list.component.ts
 import { Component, OnInit } from '@angular/core';
 import { FilmService } from '../../services/film.service';
 import { Film } from '../../models/film.model';
@@ -31,25 +30,52 @@ export class FilmListComponent implements OnInit {
     );
   }
 
-  ajouterAuPanier(film: Film): void {
-    this.filmService.addToPanier(film.id).subscribe(
-      () => {
-        alert(`${film.titre} a été ajouté au panier.`);
-        console.log('le film est ajouter avec suceeeeeeeeeeeeeee');
-
-      },
-      (error) => {
-        console.error('Erreur lors de l\'ajout au panier', error);
-        alert('Erreur lors de l\'ajout au panier : ce film existe deja sur le panier  ' );
-      }
-    );
+  ajouterAuPanier(film: Film) {
+    if (film.id) {
+      this.filmService.addToPanier(film.id)
+        .subscribe({
+          next: () => {
+            alert('Film ajouté au panier avec succès');
+          },
+          error: (err) => {
+            console.error('Erreur lors de l\'ajout au panier', err);
+            alert('Erreur lors de l\'ajout au panier');
+          }
+        });
+    } else {
+      console.error('Erreur : L\'ID du film est manquant');
+      alert('Impossible d\'ajouter ce film au panier car l\'ID est manquant.');
+    }
   }
+
 
   clearSearch(): void {
     this.searchTerm = '';
     this.getFilms();
   }
-  onSearch(): void {
-    this.getFilms();
+
+  onSearch() {
+    if (this.searchTerm.trim()) {
+      this.filmService.searchFilmByTitle(this.searchTerm)
+        .subscribe({
+          next: (films) => {
+            if (films.length > 0) {
+              this.films = films;
+            } else {
+              alert("Ce film ne se trouve pas pour le moment.");
+              this.films = []; // Réinitialise la liste de films
+            }
+          },
+          error: () => {
+            alert("Erreur lors de la recherche. Veuillez réessayer.");
+            this.films = []; // Réinitialise la liste de films
+          }
+        });
+    } else {
+      alert("Veuillez entrer un titre de film.");
+    }
   }
+
+
+
 }
