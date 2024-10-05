@@ -1,64 +1,194 @@
-/* src/app/components/panier/panier.component.css */
 .panier-container {
-  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.panier-titre {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.panier-icon {
+  margin-left: 1rem;
+  font-size: 1.8rem;
 }
 
 .film-item {
   display: flex;
-  align-items: center;
-  border: 1px solid #ddd;
-  padding: 15px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  background-color: #f9f9f9;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s ease;
 }
 
-.film-item img {
-  width: 100px;
-  height: auto;
-  border-radius: 8px;
-  margin-right: 20px;
+.film-item:hover {
+  transform: translateY(-5px);
+}
+
+.film-image-container {
+  position: relative;
+  width: 180px;
+  overflow: hidden;
+}
+
+.film-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.film-hover-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.film-image-container:hover .film-hover-overlay {
+  opacity: 1;
 }
 
 .film-details {
   flex: 1;
+  padding: 1.5rem;
 }
 
-.film-details h3 {
-  margin: 0 0 10px 0;
+.film-titre {
+  font-size: 1.4rem;
+  margin: 0 0 0.5rem 0;
+  color: #333;
 }
 
-.film-details p {
-  margin: 5px 0;
+.film-description {
+  color: #666;
+  margin-bottom: 1rem;
+  line-height: 1.6;
 }
 
-.film-details button {
-  background-color: #dc3545;
-  color: white;
-  padding: 8px 12px;
+.film-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.film-prix {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.btn-acheter, .btn-supprimer, .btn-payer, .btn-continuer {
+  padding: 0.8rem 1.5rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
+  font-weight: 600;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.film-details button:hover {
-  background-color: #c82333;
-}
-
-.achat-section {
-  text-align: right;
-  margin-top: 20px;
-}
-
-.achat-section button {
-  background-color: #28a745;
+.btn-acheter {
+  background-color: #3498db;
   color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
 }
 
-.achat-section button:hover {
-  background-color: #218838;
+.btn-acheter:hover {
+  background-color: #2980b9;
+}
+
+.btn-supprimer {
+  background-color: transparent;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.panier-resume {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.resume-ligne {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.prix-total {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.btn-payer {
+  width: 100%;
+  background-color: #27ae60;
+  color: white;
+  font-size: 1.2rem;
+  padding: 1rem;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-payer:hover {
+  background-color: #219a52;
+  transform: translateY(-2px);
+}
+
+.btn-payer::before {
+  content: '🛍️';
+  font-size: 1.4rem;
+}
+
+.panier-vide {
+  text-align: center;
+  padding: 3rem;
+}
+
+.panier-vide-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  color: #95a5a6;
+}
+
+.btn-continuer {
+  background-color: #3498db;
+  color: white;
+  margin-top: 1rem;
+}
+
+.btn-continuer:hover {
+  background-color: #2980b9;
+}
+
+@media (max-width: 768px) {
+  .film-item {
+    flex-direction: column;
+  }
+
+  .film-image-container {
+    width: 100%;
+    height: 200px;
+  }
 }

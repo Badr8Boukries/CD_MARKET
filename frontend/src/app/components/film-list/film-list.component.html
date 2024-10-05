@@ -1,26 +1,49 @@
-<!-- src/app/components/film-list/film-list.component.html -->
-
-<div class="search-bar">
-  <input
-    type="text"
-    [(ngModel)]="searchTerm"
-    placeholder="Rechercher un film..."
-    (keyup.enter)="onSearch()"
-  />
-  <button (click)="onSearch()">Rechercher</button>
-  <button (click)="clearSearch()">Effacer</button>
-</div>
-
-<!-- Affichage de la liste des films (résultats de la recherche ou films par défaut) -->
-<div class="film-list">
-  <div *ngFor="let film of films" class="film-item">
-    <img
-      [src]="film.urlImage || 'C:\\Users\\badr4\\eclipse-workspace2024\\CD_MARKET\\images\\image.jpg'"
-      alt="{{ film.titre }}"
+<div class="film-list-container">
+  <div class="search-bar">
+    <i class="fas fa-search search-icon"></i>
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      placeholder="Rechercher un film..."
+      (keyup.enter)="onSearch()"
     />
-    <h2>{{ film.titre }}</h2>
-    <p>{{ film.description }}</p>
-    <p class="film-price"><strong>{{ film.prix }}€</strong></p>
-    <button (click)="ajouterAuPanier(film)">Ajouter au panier</button>
+    <button (click)="onSearch()" class="search-button">
+      <i class="fas fa-search"></i> Rechercher
+    </button>
+    <button (click)="clearSearch()" class="clear-button">
+      <i class="fas fa-times"></i> Effacer
+    </button>
+  </div>
+
+  <div class="film-list">
+    <div *ngFor="let film of films" class="film-item">
+      <div class="film-image">
+        <img
+          [src]="film.urlImage || 'assets/images/placeholder.jpg'"
+          alt="{{ film.titre }}"
+        />
+        <div class="film-overlay">
+          <button (click)="ajouterAuPanier(film)" class="add-to-cart-button">
+            <i class="fas fa-cart-plus"></i> Ajouter au panier
+          </button>
+        </div>
+      </div>
+      <div class="film-details">
+        <h2>{{ film.titre }}</h2>
+        <p class="film-description">
+          <i class="fas fa-film"></i> {{ film.description }}
+        </p>
+        <p class="film-price">
+          <i class="fas fa-tag"></i> <strong>{{ film.prix | currency:'EUR' }}</strong>
+        </p>
+        <div class="film-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

@@ -42,6 +42,11 @@ public class PanierController {
         return ResponseEntity.noContent().build(); // Retourner un statut 204 No Content
     }
 
+    @PostMapping("/acheter-tout")
+    public ResponseEntity<String> acheterToutLePanier() {
+        return panierService.acheterToutLePanier();
+    }
+
 
 
 

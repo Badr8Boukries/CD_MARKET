@@ -15,8 +15,14 @@ export class PanierComponent implements OnInit {
 
   constructor(private panierService: PanierService) { }
 
-  ngOnInit(): void {
-    this.getPanier();
+  ngOnInit() {
+    this.chargerPanier();
+  }
+
+  chargerPanier() {
+    this.panierService.getPanier().subscribe(
+      data => this.panier = data
+    );
   }
 
   getPanier(): void {
@@ -53,5 +59,23 @@ export class PanierComponent implements OnInit {
         alert('Erreur lors de l\'achat.');
       });
     }
+  }
+  acheterToutLePanier() {
+    this.panierService.acheterToutLePanier().subscribe(
+      response => {
+        alert('Achat réussi : ' + response);
+        this.chargerPanier(); // Recharger le panier après l'achat
+      },
+      error => {
+        alert('Erreur lors de l\'achat : ' + error.message);
+      }
+    );
+  }
+
+  calculerTotal(): number {
+    if (!this.panier || !this.panier.films) {
+      return 0;
+    }
+    return this.panier.films.reduce((total, film) => total + film.prix, 0);
   }
 }

@@ -27,4 +27,8 @@ export class PanierService {
   acheterFilms(filmId: number): Observable<void> {
     return this.http.post<void>(`http://localhost:8080/achats/achter/${filmId}`, {}); // Mettre à jour l'URL ici
   }
+  acheterToutLePanier(): Observable<string> {
+    return this.http.post<string>(`${this.baseUrl}/acheter-tout`, {});
+  }
+
 }
