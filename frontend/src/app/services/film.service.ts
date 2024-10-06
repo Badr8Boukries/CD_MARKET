@@ -15,7 +15,7 @@ export class FilmService {
 
   // Récupérer tous les films
   getFilms(): Observable<Film[]> {
-    console.log('Appel à l\'API pour récupérer les films...');
+
     return this.http.get<Film[]>(`${this.baseUrl}/films`).pipe(
       tap((data) => console.log('Données reçues :', data)) // Affiche les données dans la console
     );

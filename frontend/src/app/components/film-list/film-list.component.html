@@ -16,7 +16,7 @@
   </div>
 
   <div class="film-list">
-    <div *ngFor="let film of films" class="film-item">
+    <div *ngFor="let film of filmsPaginated" class="film-item">
       <div class="film-image">
         <img
           [src]="film.urlImage || 'assets/images/placeholder.jpg'"
@@ -45,5 +45,12 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- Pagination Controls -->
+  <div class="pagination-controls">
+    <button (click)="previousPage()" [disabled]="currentPage === 1">Précédent</button>
+    <span>Page {{ currentPage }} sur {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Suivant</button>
   </div>
 </div>

@@ -159,3 +159,46 @@
 .film-rating i {
   margin-right: 2px;
 }
+.page-input {
+  width: 60px; /* Largeur du champ de saisie */
+  padding: 5px; /* Espacement interne */
+  margin: 0 10px; /* Espacement horizontal */
+  border: 1px solid #007bff; /* Bordure bleue */
+  border-radius: 5px; /* Coins arrondis */
+}
+
+.go-button {
+  background-color: #007bff; /* Couleur de fond bleue */
+  color: white; /* Couleur du texte en blanc */
+  border: none; /* Pas de bordure */
+  border-radius: 5px; /* Coins arrondis */
+  padding: 5px 10px; /* Espacement interne */
+  cursor: pointer; /* Curseur en forme de main */
+  transition: background-color 0.3s; /* Transition pour l'effet de survol */
+}
+
+.go-button:hover {
+  background-color: #0056b3; /* Couleur de fond plus foncée au survol */
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center; /* Centrer verticalement */
+  margin-top: 20px; /* Espacement au-dessus de la pagination */
+}
+
+button {
+  margin: 0 5px; /* Espacement entre les boutons */
+  padding: 8px 12px; /* Espacement interne des boutons */
+  background-color: #007bff; /* Couleur de fond bleue */
+  color: white; /* Couleur du texte en blanc */
+  border: none; /* Pas de bordure */
+  border-radius: 5px; /* Coins arrondis */
+  cursor: pointer; /* Curseur en forme de main */
+  transition: background-color 0.3s; /* Transition pour l'effet de survol */
+}
+
+button:disabled {
+  background-color: #cccccc; /* Couleur de fond pour le bouton désactivé */
+  cursor: not-allowed; /* Curseur indiquant que le bouton est désactivé */
+}
