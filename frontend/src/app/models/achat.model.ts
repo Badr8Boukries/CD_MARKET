@@ -1,8 +1,14 @@
 // src/app/models/achat.model.ts
 import { Film } from './film.model';
 
-export interface Achat {
+export class Achat {
   id: number;
-  films: Film[];
   dateAchat: Date;
+  films: Film[];  // Tableau de films associés à l'achat
+
+  constructor(id: number, dateAchat: Date, films: Film[]) {
+    this.id = id;
+    this.dateAchat = dateAchat;
+    this.films = films;
+  }
 }

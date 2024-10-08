@@ -1,19 +1,23 @@
 <div class="achat-container">
-  <h2><i class="fas fa-shopping-cart"></i> Mes Achats</h2>
+  <h2><i class="fas fa-film"></i> Ma Cinémathèque Personnelle</h2>
 
   <div *ngIf="achats.length > 0; else aucunAchat">
     <div class="achat-item" *ngFor="let achat of achats">
       <div class="achat-header">
-        <h3><i class="fas fa-receipt"></i> Achat :y</h3>
-        <p><i class="far fa-calendar-alt"></i> {{ achat.dateAchat | date:'dd/MM/yyyy HH:mm' }}</p>
+        <h3><i class="fas fa-ticket-alt"></i>  </h3>
+        <p><i class="far fa-clock"></i> Acquis le {{ achat.dateAchat | date:'dd MMMM yyyy à HH:mm' }}</p>
       </div>
       <div class="films-achat">
         <div class="film-item" *ngFor="let film of achat.films">
-          <img [src]="film.urlImage" alt="{{ film.titre }}" />
+          <div class="film-poster">
+            <img [src]="film.urlImage" alt="{{ film.titre }}" />
+            <div class="film-overlay">
+              <p class="film-description">{{ film.description }}</p>
+            </div>
+          </div>
           <div class="film-details">
             <h4>{{ film.titre }}</h4>
-            <p class="description"><i class="fas fa-info-circle"></i> {{ film.description }}</p>
-            <p class="prix"><i class="fas fa-tag"></i> <strong>{{ film.prix }}€</strong></p>
+            <p class="prix"><i class="fas fa-ticket-alt"></i> <strong>{{ film.prix }}€</strong></p>
           </div>
         </div>
       </div>
@@ -22,8 +26,9 @@
 
   <ng-template #aucunAchat>
     <div class="aucun-achat">
-      <i class="fas fa-shopping-basket"></i>
-      <p>Aucun achat enregistré.</p>
+      <i class="fas fa-film"></i>
+      <p>Votre collection de films est vide pour le moment.</p>
+      <button class="btn-explorer">Explorer le catalogue</button>
     </div>
   </ng-template>
 </div>

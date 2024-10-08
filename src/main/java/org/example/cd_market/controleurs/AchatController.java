@@ -1,3 +1,4 @@
+// src/main/java/org/example/cd_market/controleurs/AchatController.java
 package org.example.cd_market.controleurs;
 
 import org.example.cd_market.models.Achat;
@@ -14,6 +15,7 @@ import java.util.List;
 @RequestMapping("/achats")
 @CrossOrigin(origins = "http://localhost:4200")
 public class AchatController {
+
     @Autowired
     private AchatService achatService;
 
@@ -22,7 +24,7 @@ public class AchatController {
         Achat achat = achatService.acheter(filmId);
 
         if (achat == null) {
-            return ResponseEntity.notFound().build(); // Film non trouvé dans le panier
+            return ResponseEntity.notFound().build();
         }
 
         return ResponseEntity.ok(achat);
