@@ -20,6 +20,7 @@ public class AchatService {
     @Autowired
     private FilmRepository filmRepository;
 
+    // Acheter un seul film par ID
     public Achat acheter(Long filmId) {
         Film film = filmRepository.findById(filmId).orElse(null);
 
@@ -27,10 +28,22 @@ public class AchatService {
             return null; // Film non trouvé
         }
 
-        // Crée un nouvel achat avec la date actuelle et le film
         Achat achat = new Achat();
         achat.setDateAchat(LocalDateTime.now());
-        achat.setFilms(List.of(film));  // Associer le film à l'achat
+        achat.setFilms(List.of(film));
+
+        return achatRepository.save(achat);
+    }
+
+    // Acheter tous les films dans le panier
+    public Achat acheterTous(List<Film> films) {
+        if (films == null || films.isEmpty()) {
+            return null; // Pas de films dans le panier
+        }
+
+        Achat achat = new Achat();
+        achat.setDateAchat(LocalDateTime.now());
+        achat.setFilms(films); // Associer les films à l'achat
 
         return achatRepository.save(achat);
     }

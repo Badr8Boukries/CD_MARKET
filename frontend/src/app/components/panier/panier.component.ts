@@ -61,16 +61,24 @@ export class PanierComponent implements OnInit {
     }
   }
   acheterToutLePanier() {
-    this.panierService.acheterToutLePanier().subscribe(
-      response => {
-        alert('Achat réussi : ' + response);
-        this.chargerPanier(); // Recharger le panier après l'achat
+    if (!this.panier || this.panier.films.length === 0) {
+      alert('Votre panier est vide.');
+      return;
+    }
+
+    this.panierService.acheterToutLePanier().subscribe({
+      next: (response) => {
+        console.log('Achat réussi', response);
       },
-      error => {
-        alert('Erreur lors de l\'achat : ' + error.message);
+      error: (error) => {
+        console.error('Erreur lors de l\'achat:', error);
+        // Affichez un message d'erreur à l'utilisateur
+        alert('Erreur lors de l\'achat. Vérifiez votre panier et réessayez.');
       }
-    );
+    });
+
   }
+
 
   calculerTotal(): number {
     if (!this.panier || !this.panier.films) {

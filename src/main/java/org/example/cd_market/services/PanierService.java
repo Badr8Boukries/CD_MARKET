@@ -1,5 +1,6 @@
 package org.example.cd_market.services;
 
+import org.example.cd_market.models.Achat;
 import org.example.cd_market.models.Film;
 import org.example.cd_market.models.Panier;
 import org.example.cd_market.repositories.PanierRepository;
@@ -17,6 +18,9 @@ import java.util.stream.Collectors;
 public class PanierService {
     private PanierRepository panierRepository;
     private Panier panierUnique;
+
+    @Autowired
+    private AchatService achatService;
 
     @Autowired
     public PanierService(PanierRepository panierRepository) {
@@ -98,29 +102,20 @@ public class PanierService {
         }
 
         try {
-            // Calculer le montant total
-            double montantTotal = panierUnique.getFilms().stream()
-                    .mapToDouble(Film::getPrix)
-                    .sum();
+            // Acheter tous les films dans le panier
+            Achat nouvelAchat = achatService.acheterTous(new ArrayList<>(panierUnique.getFilms()));
 
-            // Ici, vous pouvez ajouter la logique pour le traitement du paiement
-            // Par exemple, intégration avec un service de paiement
-
-            // Journalisation des films achetés
-            List<String> titresFilmsAchetes = panierUnique.getFilms().stream()
-                    .map(Film::getTitre)
-                    .collect(Collectors.toList());
-            System.out.println("Achat effectué - Films : " + String.join(", ", titresFilmsAchetes));
-            System.out.println("Montant total : " + montantTotal + "€");
+            if (nouvelAchat == null) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body("Erreur lors de l'achat");
+            }
 
             // Vider le panier après l'achat
             clearPanier();
 
-            return ResponseEntity.ok("Achat réussi. Montant total : " + montantTotal + "€");
+            return ResponseEntity.ok("Achat réussi de " + nouvelAchat.getFilms().size() + " films.");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Erreur lors du traitement de l'achat : " + e.getMessage());
         }
-
-
     }}
