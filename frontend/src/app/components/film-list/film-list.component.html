@@ -18,10 +18,10 @@
   <div class="film-list">
     <div *ngFor="let film of filmsPaginated" class="film-item">
       <div class="film-image">
-        <img
-          [src]="film.urlImage || 'assets/images/placeholder.jpg'"
-          alt="{{ film.titre }}"
-        />
+        <img [src]="film.urlImage" alt="{{ film.titre }}" />
+
+
+
         <div class="film-overlay">
           <button (click)="ajouterAuPanier(film)" class="add-to-cart-button">
             <i class="fas fa-cart-plus"></i> Ajouter au panier
