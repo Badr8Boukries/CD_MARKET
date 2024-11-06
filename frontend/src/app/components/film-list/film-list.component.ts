@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FilmService } from '../../services/film.service';
 import { Film } from '../../models/film.model';
+import {PanierConfirmationComponent} from "../../panier-confirmation/panier-confirmation.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-film-list',
@@ -17,7 +19,7 @@ export class FilmListComponent implements OnInit {
   itemsPerPage: number = 10; // On affiche 15 films par page
   totalPages: number = 0;
 
-  constructor(private filmService: FilmService) { }
+  constructor(private filmService: FilmService  , private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getFilms();
@@ -97,12 +99,19 @@ export class FilmListComponent implements OnInit {
   }
 
   // Ajouter un film au panier
-  ajouterAuPanier(film: Film) {
+  ajouterAuPanier(film: Film): void {
     if (film.id) {
       this.filmService.addToPanier(film.id)
         .subscribe({
           next: () => {
-            alert('Film ajouté au panier avec succès');
+            this.dialog.open(PanierConfirmationComponent, {
+              data: { filmTitre: film.titre },
+              width: '400px',
+              height: '250px',
+              disableClose: true,
+              panelClass: 'custom-dialog-container',
+              position: { top: '50%', left: '50%' } // Positionne le dialogue au centre
+            });
           },
           error: (err) => {
             console.error('Erreur lors de l\'ajout au panier', err);
@@ -114,4 +123,7 @@ export class FilmListComponent implements OnInit {
       alert('Impossible d\'ajouter ce film au panier car l\'ID est manquant.');
     }
   }
+
+
+
 }
